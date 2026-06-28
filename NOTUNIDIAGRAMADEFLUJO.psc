@@ -1,12 +1,9 @@
 Algoritmo NotUni
-	Definir opcion, repetir_menu Como Entero
-	Definir seguir Como Cadena
-	
 	Escribir "##########################################"
 	Escribir "                NOTUNI                    "
 	Escribir "##########################################"
-	Escribir "°Bienvenido a NOTUNI!"
-	Escribir "El programa que te ayudar· a calcular tus notas de manera f·cil y r·pida."
+	Escribir "¬°Bienvenido a NOTUNI!"
+	Escribir "El programa que te ayudar√° a calcular tus notas de manera f√°cil y r√°pida."
 	
 	seguir <- "s"
 	
@@ -14,10 +11,10 @@ Algoritmo NotUni
 		repetir_menu <- 1
 		Mientras repetir_menu = 1 Hacer
 			Escribir ""
-			Escribir "øQue desea hacer?"
+			Escribir "¬øQue desea hacer?"
 			Escribir "1. Calcular notas(puntos a puntos)"
 			Escribir "2. Calcular porcentajes de notas"
-			Escribir "Ingrese el n˙mero de la opciÛn: " Sin Saltar
+			Escribir "Ingrese el n√∫mero de la opci√≥n: " 
 			Leer opcion
 			
 			Si opcion = 1 Entonces
@@ -28,15 +25,14 @@ Algoritmo NotUni
 					calcular_porcentajes
 					repetir_menu <- 0
 				Sino
-					Escribir "OpciÛn no v·lida. Por favor, ingrese 1 o 2."
+					Escribir "Opci√≥n no v√°lida. Por favor, ingrese 1 o 2."
 				FinSi
 			FinSi
 		FinMientras
 		
 		Escribir ""
-		Escribir "øDeseas calcular tus notas nuevamente o de alguna otra materia? (s/n): " Sin Saltar
+		Escribir "¬øDeseas calcular tus notas nuevamente o de alguna otra materia? (s/n): " 
 		Leer seguir
-		seguir <- Minusculas(seguir)
 	FinMientras
 	
 	Escribir ""
@@ -44,27 +40,19 @@ Algoritmo NotUni
 FinAlgoritmo
 
 SubProceso calcular_porcentajes
-	Definir LIMITE_PORCENTAJE, PUNTOS_BASE_20 Como Reales
 	LIMITE_PORCENTAJE <- 100.0
-	PUNTOS_BASE_20 <- 20.0
-	
-	Definir numerodenotas, repetir_bucle Como Entero
-	Definir punto_max, porcentajenota, punto_obtenido, porcentaje_obtenido Como Reales
-	Definir total_porcentaje, total_porcentaje_obtenido, resumen, resumen_puntos, restante Como Reales
-	Definir i Como Entero
-	
-	repetir_bucle <- 1
-	Mientras repetir_bucle = 1 Hacer
+	repetir_bucle <- 0
+	Mientras repetir_bucle = 0 Hacer
 		Escribir ""
-		Escribir "øCu·ntas notas deseas ingresar?: " Sin Saltar
+		Escribir "¬øCu√°ntas notas deseas ingresar?: " 
 		Leer numerodenotas
-		Escribir "Ingrese el punto m·ximo de la nota: " Sin Saltar
+		Escribir "Ingrese el punto m√°ximo de la nota: " 
 		Leer punto_max
 		
 		Si numerodenotas <= 0 O punto_max <= 0 Entonces
-			Escribir "Lo siento, ingresaste un valor inv·lido."
+			Escribir "Lo siento, ingresaste un valor inv√°lido."
 		Sino
-			repetir_bucle <- 0
+			repetir_bucle <- 1
 		FinSi
 	FinMientras
 	
@@ -72,24 +60,24 @@ SubProceso calcular_porcentajes
 	total_porcentaje_obtenido <- 0
 	
 	Para i <- 1 Hasta numerodenotas Con Paso 1 Hacer
-		repetir_bucle <- 1
-		Mientras repetir_bucle = 1 Hacer
+		repetir_bucle <- 0
+		Mientras repetir_bucle = 0 Hacer
 			Escribir ""
-			Escribir "EvaluaciÛn n˙mero ", i
+			Escribir "Evaluaci√≥n n√∫mero ", i
 			
-			Escribir "Ingrese el porcentaje de la nota (ejemplo: 20 para 20%): " Sin Saltar
+			Escribir "Ingrese el porcentaje de la nota (ejemplo: 20 para 20%): "
 			Leer porcentajenota
-			Escribir "Ingrese el punto obtenido: " Sin Saltar
+			Escribir "Ingrese el punto obtenido: " 
 			Leer punto_obtenido
 			
 			Si punto_max <= 0 O punto_obtenido < 0 O porcentajenota < 0 Entonces
 				Escribir "--------------------------------------------------------------------------------"
-				Escribir "Los valores no pueden ser negativos y el punto m·ximo debe ser mayor a 0."
+				Escribir "Los valores no pueden ser negativos y el punto m√°ximo debe ser mayor a 0."
 				Escribir "--------------------------------------------------------------------------------"
 			Sino
 				Si punto_obtenido > punto_max Entonces
 					Escribir "--------------------------------------------------------------------------------"
-					Escribir "Error: El punto obtenido no puede ser mayor al punto m·ximo."
+					Escribir "Error: El punto obtenido no puede ser mayor al punto m√°ximo."
 					Escribir "--------------------------------------------------------------------------------"
 				Sino
 					porcentaje_obtenido <- (punto_obtenido / punto_max) * porcentajenota
@@ -97,45 +85,44 @@ SubProceso calcular_porcentajes
 					total_porcentaje_obtenido <- total_porcentaje_obtenido + porcentaje_obtenido
 					
 					Escribir "De esta nota obtuviste un ", porcentaje_obtenido, "% de tu nota final."
-					repetir_bucle <- 0
+					repetir_bucle <- 1
 				FinSi
 			FinSi
 		FinMientras
 	FinPara
 	
 	Si total_porcentaje > 0 Y total_porcentaje <= LIMITE_PORCENTAJE Entonces
-		resumen <- (total_porcentaje_obtenido / total_porcentaje)
-		resumen_puntos <- resumen * PUNTOS_BASE_20
+		resumen_puntos <- (total_porcentaje_obtenido / 100) * punto_max
 		
+		Escribir ""
 		Escribir "##########################################"
 		Escribir "             RESUMEN DE NOTUNI            "
 		Escribir "##########################################"
 		Escribir "Porcentaje total evaluado de las ", numerodenotas, " notas: ", total_porcentaje, "%"
-		Escribir "PORCENTAJE TOTAL OBTENIDO: ", total_porcentaje_obtenido, "%"
-		Escribir "TU PROMEDIO EN PUNTOS: ", resumen_puntos, " / ", punto_max
+		Escribir "PORCENTAJE TOTAL OBTENIDO: ", total_porcentaje_obtenido, "% de un 100% ideal."
+		Escribir "TU NOTA ACUMULADA EN PUNTOS: ", resumen_puntos, " / ", punto_max
 		
 		Si total_porcentaje < LIMITE_PORCENTAJE Entonces
 			restante <- LIMITE_PORCENTAJE - total_porcentaje
-			Escribir "TodavÌa falta por evaluar un ", restante, "% de la materia."
+			Escribir "Todav√≠a falta por evaluar un ", restante, "% de la materia."
 		FinSi
 		Escribir "------------------------------------------"
 	Sino
 		Escribir ""
-		Escribir "El porcentaje total sumÛ ", total_porcentaje, "%. No puede ser mayor a 100%."
+		Escribir "El porcentaje total sum√≥ ", total_porcentaje, "%. No puede ser mayor a 100%."
 	FinSi
 FinSubProceso
 
 SubProceso calcular_puntos
-	Definir resumennotas, notas, resumenpuntos Como Reales
-	Definir numerodenotas, numero_max, i, repetir_bucle Como Entero
+	
 	
 	repetir_bucle <- 1
 	Mientras repetir_bucle = 1 Hacer
 		resumennotas <- 0
 		
-		Escribir "Digite el n˙mero de notas: " Sin Saltar
+		Escribir "Digite el n√∫mero de notas: " 
 		Leer numerodenotas
-		Escribir "Digite el n˙mero m·ximo de puntos: " Sin Saltar
+		Escribir "Digite el n√∫mero m√°ximo de puntos: " 
 		Leer numero_max
 		
 		Si numerodenotas >= 0 Y numero_max >= 0 Entonces
@@ -143,7 +130,7 @@ SubProceso calcular_puntos
 				resumenpuntos <- 0
 			Sino
 				Para i <- 1 Hasta numerodenotas Con Paso 1 Hacer
-					Escribir "Digite la nota ", i, ": " Sin Saltar
+					Escribir "Digite la nota ", i, ": " 
 					Leer notas
 					resumennotas <- resumennotas + notas
 				FinPara
@@ -152,7 +139,7 @@ SubProceso calcular_puntos
 			
 			Si resumenpuntos > numero_max Entonces
 				Escribir "--------------------------------------------------------------------------------"
-				Escribir "Error: El promedio en puntos no puede ser mayor al n˙mero m·ximo de puntos."
+				Escribir "Error: El promedio en puntos no puede ser mayor al n√∫mero m√°ximo de puntos."
 				Escribir "--------------------------------------------------------------------------------"
 			Sino
 				Escribir "##########################################"
@@ -163,7 +150,7 @@ SubProceso calcular_puntos
 				repetir_bucle <- 0
 			FinSi
 		Sino
-			Escribir "El n˙mero de notas debe ser mayor a 0 y los puntos m·ximos no pueden ser negativos. Intente de nuevo."
+			Escribir "El n√∫mero de notas debe ser mayor a 0 y los puntos m√°ximos no pueden ser negativos. Intente de nuevo."
 		FinSi
 	FinMientras
 FinSubProceso
