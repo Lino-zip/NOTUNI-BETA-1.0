@@ -1,3 +1,5 @@
+def tabla_converciones():
+    print("en prueba")
 def calcular_porcentajes():
     
             #bucle para asegurar que el número de notas sea valido sin cerrar el programa
